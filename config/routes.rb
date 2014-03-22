@@ -1,4 +1,6 @@
 BidHelper::Application.routes.draw do
+  resources :task_seekers
+
   resources :tasks
 
   resources :users

@@ -1,0 +1,25 @@
+<h1>Listing task_seekers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @task_seekers.each do |task_seeker| %>
+      <tr>
+        <td><%= link_to 'Show', task_seeker %></td>
+        <td><%= link_to 'Edit', edit_task_seeker_path(task_seeker) %></td>
+        <td><%= link_to 'Destroy', task_seeker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Task seeker', new_task_seeker_path %>
