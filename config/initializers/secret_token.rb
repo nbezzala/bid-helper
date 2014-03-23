@@ -9,4 +9,19 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-BidHelper::Application.config.secret_key_base = 'a46f30042ca8a6b30a8ff48958b77d422ec86d6117ee17d236ad56f8c2f400cded1ae9d6472ea669e52f241b1f2fb1f707bc12f7aad2d2cf47664e8c7b7d9dcc'
+#BidHelper::Application.config.secret_key_base = 'a46f30042ca8a6b30a8ff48958b77d422ec86d6117ee17d236ad56f8c2f400cded1ae9d6472ea669e52f241b1f2fb1f707bc12f7aad2d2cf47664e8c7b7d9dcc'
+
+require 'securerandom'
+
+def secure_token
+	token_file = Rails.root.join('.secret')
+	if File.exist?(token_file)
+		File.read(token_file).chomp	
+	else
+		token = SecureRandom.hex(64)
+		File.write(token_file, token)
+		token
+	end
+end
+
+BidHelper::Application.config.secret_key_base = secure_token
