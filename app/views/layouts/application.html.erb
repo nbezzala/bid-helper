@@ -3,12 +3,16 @@
 <head>
   <title>BidHelper</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <!-- //netdna.bootstrapcdn.com/bootswatch/3.1.1/cerulean/bootstrap.min.css -->
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <%= render 'layouts/shim' %>
 </head>
 <body>
-
-<%= yield %>
-
+<%= render 'layouts/header' %>
+<div class="container">
+	<%= yield %>
+	<%= render 'layouts/footer' %>
+</div>
 </body>
 </html>
