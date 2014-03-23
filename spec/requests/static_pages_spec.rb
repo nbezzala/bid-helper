@@ -8,7 +8,7 @@ describe "StaticPages" do
     before { visit root_path }
 
     it { should have_content('Sample App') }
-    it { should have_title('BidHelper') }
+    it { should have_title('Bid Helper') }
     it { should_not have_title(' | Home') }
   end
 
@@ -24,15 +24,8 @@ describe "StaticPages" do
 
   describe "Contact page" do
     before { visit contact_path }
-  	it "should have the content 'Contact'" do
-  		visit contact_path
-  		expect(page).to have_content('Contact')
-  	end
-
-  	it "should have the title 'Contact" do
-  		visit contact_path
-  		expect(page).to have_title('Contact')
-  	end
+    it { should have_selector('h1', text: 'Contact')}
+    it { should have_title('Contact') }
 
   end
 
