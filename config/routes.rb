@@ -1,8 +1,10 @@
 BidHelper::Application.routes.draw do
+  
   root 'static_pages#home'
   match '/help', to: 'static_pages#help', via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
   match '/about', to: 'static_pages#about', via: 'get'
+  match '/signup', to: 'users#new', via: 'get'
   resources :task_seekers
 
   resources :tasks
