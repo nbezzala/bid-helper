@@ -9,11 +9,13 @@ gem 'rails', '4.0.3'
 group :development do
 	gem 'sqlite3', '1.3.8'
 	gem 'rspec-rails', '2.13.1'
+	gem 'guard-rspec', '2.5.0'
 end
 
 group :test do
 	gem 'selenium-webdriver', '2.35.1'
 	gem 'capybara', '2.1.0'
+	gem 'libnotify', '0.8.0'
 end
 
 group :production do
