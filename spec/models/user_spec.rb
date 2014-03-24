@@ -2,13 +2,18 @@ require 'spec_helper'
 
 describe User do
 
-	before { @user = User.new(name: "Test one", email: "test@one.com") }
+	before { @user = User.new(name: "Test one", email: "test@one.com",
+			password: "foobar", password_confirmation: "foobar"
+		) }
 
 	subject { @user }
 
 	it { should respond_to(:name) }
 	it { should respond_to(:email) }
 	it { should respond_to(:password_digest) }
+	it { should respond_to(:password) }
+	it { should respond_to(:password_confirmation) }
+	it { should respond_to(:authenticate) }
 
 	it { should be_valid }
 
@@ -64,7 +69,40 @@ describe User do
 			@user.save
 			expect(@user.reload.email).to eq mixed_case_email.downcase
 		end
+	end
 
+	describe "When password is empty" do
+		before do
+			@user = User.new(name: "A", email: "a@b.c", password: "", password_confirmation: "b")
+		end
+		it { should_not be_valid }
+	end
+
+	describe "Password should match passord confirmation" do
+		before do
+			@user.password_confirmation = "mismatch"
+		end
+		it { should_not be_valid }
+	end
+
+	describe "password too short" do
+		before { @user.password = @user.password_confirmation = "a" * 5 }
+		it { should be_invalid }
+	end
+
+	describe "return value of authenticate method" do
+		before { @user.save }
+		let(:saved_user) { User.find_by(email: @user.email) }
+
+		describe "when password match" do
+			it { should eq saved_user.authenticate(@user.password) }
+		end
+
+		describe "when invalid password" do
+			let(:user_with_invalid_password) { saved_user.authenticate("invalid") }
+			it { should_not eq user_with_invalid_password }
+			specify { expect(user_with_invalid_password).to be_false }
+		end
 	end
 
 end
