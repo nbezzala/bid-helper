@@ -53,8 +53,16 @@ describe User do
 			puts duplicate_user.email
 			duplicate_user.save
 		end
-
 		it { should_not be_valid }
+	end
+
+	describe "email should be saved as lower case" do
+		let(:mixed_case_email) { "Foo@EXample.coM" }
+		it "should be saved as all lower case" do
+			@user.email = mixed_case_email
+			@user.save
+			expect(@user.reload.email).to eq mixed_case_email.downcase
+		end
 
 	end
 
