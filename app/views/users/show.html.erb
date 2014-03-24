@@ -12,12 +12,12 @@
 
 <p>
   <strong>Signup date:</strong>
-  <%= @user.signup_date %>
+  <%= @user.created_at %>
 </p>
 
 <p>
   <strong>Last access:</strong>
-  <%= @user.last_access %>
+  <%= @user.updated_at %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
