@@ -25,4 +25,37 @@ describe User do
 		before { @user.name = "a" * 101 }
 		it { should_not be_valid }
 	end
+
+	describe "When email is not valid" do
+		it "should be invalid" do
+			addresses = %w[foo foo@ foo@bar foo@bar, user_at_foo.org foo@bar+baz.com]
+			addresses.each do |invalid_address|
+				@user.email  = invalid_address
+				expect(@user).to be_invalid
+			end
+		end
+	end
+
+	describe "When email is valid" do
+		it "should be valid" do
+			addresses = %w[foo@bar.com foo@bar.co.nz foo1a@bar.in user@foo.org foo@barbaz.com]
+			addresses.each do |invalid_address|
+				@user.email  = invalid_address
+				expect(@user).to be_valid
+			end
+		end
+	end
+
+	describe "When email address is already used" do
+		before do
+			duplicate_user = @user.dup
+			duplicate_user.email = @user.email.upcase
+			puts duplicate_user.email
+			duplicate_user.save
+		end
+
+		it { should_not be_valid }
+
+	end
+
 end
