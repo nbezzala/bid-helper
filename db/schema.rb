@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140324004646) do
+ActiveRecord::Schema.define(version: 20140324005154) do
 
   create_table "task_seekers", force: true do |t|
     t.datetime "created_at"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 20140324004646) do
   end
 
   create_table "tasks", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
